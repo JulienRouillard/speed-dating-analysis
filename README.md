@@ -64,9 +64,9 @@ On average, people **overestimate** their dating market value by approximately *
 
 ### Date Order Effects
 
-No significant difference between being the **first** date (42.9% acceptance) vs. the **last** date (39.0% acceptance) of the evening (p = 0.1458).
+No significant difference between being the **first** date (49.1% acceptance) vs. the **last** date (45.2% acceptance) of the evening (p = 0.1949).
 
-However, being the **1st date** shows significantly better outcomes than being the **10th date** (p = 0.0146), suggesting moderate fatigue effects.
+However, being the **1st date** shows significantly better outcomes than being the **10th date** (p = 0.0097), suggesting moderate fatigue effects.
 
 ## 🛠️ Technologies Used
 
