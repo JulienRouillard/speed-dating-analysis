@@ -1,151 +1,130 @@
-# Speed Dating Data Analysis
+# Speed Dating Analysis: When Data Reveals What People Really Want
 
-A comprehensive data science project analyzing a Speed Dating dataset to uncover what really drives romantic decisions.
+![Python](https://img.shields.io/badge/Python-3.10+-blue?logo=python&logoColor=white)
+![Statistics](https://img.shields.io/badge/Statistics-Hypothesis%20Testing-orange)
+![Data Analysis](https://img.shields.io/badge/Data%20Analysis-Behavioral%20Insights-green)
 
-## 📊 Project Overview
+**8,378 speed dates. 551 participants. What really drives romantic attraction?**
 
-This project explores over 8,000 speed dating encounters to answer fundamental questions about human attraction and decision-making in romantic contexts. Using statistical analysis and machine learning, we challenge common assumptions about what people look for in potential partners.
+This project analyzes behavioral data to understand romantic decision-making. I compare what people say they want versus what they actually choose. I also measure how demographic factors affect decisions and quantify self-perception biases. The results show clear gaps between what people think matters and what really predicts a match.
 
-## 🎯 Key Questions Explored
+---
 
-1. **What qualities do men and women actually seek in partners?**
-   - Comparing stated preferences vs. actual behavior
-   
-2. **How important is physical attractiveness really?**
-   - Analyzing the gap between perceived and real impact
-   
-3. **Shared interests vs. shared background: which matters more?**
-   - Quantifying the role of shared attributes in matching
-   
-4. **Can people accurately assess their own dating market value?**
-   - Measuring the gap between self-perception and reality
-   
-5. **Does the order of dates throughout the evening matter?**
-   - Testing for fatigue effects in decision-making
+## 🎯 Core Business Question
 
-## 🔍 Key Findings
+Dating apps rely on user-declared preferences (filters, profile settings). But what if these declared preferences don't predict actual attraction? This analysis measures the gap between what people say they want and what they really respond to in face-to-face interactions.
 
-### The "Stated vs. Revealed" Preference Paradox
+---
 
-**Women's preferences:**
-- **Stated**: Intelligence and sincerity are most important
-- **Reality**: Shared interests, attractiveness, and fun differentiate accepted from rejected partners
+## 📊 Key Findings
 
-![Attribute Differences](images/diff_attributs_women.png)
+### 1. The Stated vs. Revealed Preference Paradox
 
-**Men's preferences:**
-- **Stated**: Attractiveness dominates
-- **Reality**: Attractiveness, shared interests, and fun are the key drivers (with attractiveness having notably stronger impact)
+**Women say they want:** Intelligence (21.0/100) and Sincerity (18.3/100)  
+**Women actually choose based on:** Shared Interests, Attractiveness, and Fun (1.8+ point gap between accepted vs. rejected partners)
 
-![Attribute Differences](images/diff_attributs_men.png)
+**Men say they want:** Attractiveness above all (27.0/100, 1.5x higher than other traits)  
+**Men actually choose based on:** Attractiveness remains #1, but Shared Interests and Fun are almost as important (1.6-1.7 point gaps)
 
-### The Attractiveness Myth
+**Main insight:** What people declare as their priorities does not predict what drives their actual decisions. Shared interests are ranked last in stated preferences but are one of the strongest factors when accepting a second date.
 
-People believe attractiveness is **overwhelmingly** the most important factor (rated 2x higher than other attributes). While attractiveness is indeed the top factor, its real impact is more **moderate** compared to other qualities like shared interests and fun.
+![Attribute Differences - Women](images/diff_attributs_women.png)
+![Attribute Differences - Men](images/diff_attributs_men.png)
 
-### Shared Interests vs. Shared Race
+---
 
-Using logistic regression with standardized coefficients:
-- **Shared interests coefficient**: 0.9627 (highly significant, p < 0.001)
-- **Same race coefficient**: 0.0165 (not significant, p = 0.754)
+### 2. Shared Interests Outweigh Shared Background
 
-**Result**: Shared interests have ~58x more impact than racial background in predicting match acceptance.
+I used logistic regression with standardized coefficients to measure the effect of each factor:
 
-### Self-Assessment Accuracy
+- **Shared Interests coefficient:** 0.9627 (p < 0.001, highly significant)
+- **Same Race coefficient:** 0.0165 (p = 0.754, not significant)
 
-On average, people **overestimate** their dating market value by approximately **1 point** (on a 10-point scale) across all attributes:
-- Fun: +1.26 points
-- Intelligence: +1.10 points  
-- Attractiveness: +0.99 points
-- Sincerity: +0.86 points
-- Ambition: +0.75 points
+**What this means:** Shared interests have about **58x more impact** than racial similarity when predicting if someone will accept a second date. The confidence interval for same-race effect includes zero, which means we cannot even confirm it has any positive effect.
+
+**Model Performance:** 67.9% accuracy vs. 56.7% baseline (random guessing) — this confirms that these features truly predict decisions.
+
+---
+
+### 3. Systematic Self-Perception Bias
+
+People overestimate their dating market value by an average of **1.0 point** (on a 10-point scale) across all attributes:
+
+- Fun: +1.27 points
+- Sincerity: +1.07 points  
+- Intelligence: +0.99 points
+- Attractiveness: +0.90 points
+- Ambition: +0.76 points
+
+**Business impact:** Self-reported attractiveness data (commonly used in dating apps) is systematically inflated and cannot be trusted for matching algorithms.
 
 ![Self-Assessment Gap](images/self_evaluation_vs_real.png)
 
-### Date Order Effects
+---
 
-No significant difference between being the **first** date (49.1% acceptance) vs. the **last** date (45.2% acceptance) of the evening (p = 0.1949).
+## 🔬 Methodology
 
-However, being the **1st date** shows significantly better outcomes than being the **10th date** (p = 0.0097), suggesting moderate fatigue effects.
+**Data Processing:**
+- Cleaned 8,378 speed dating records (reduced 195 columns to focused subset)
+- Handled missing values strategically (used dropna on key variables, kept 87% of data)
+- Standardized continuous variables to enable coefficient comparison
 
-## 🛠️ Technologies Used
+**Statistical Approach:**
+- **Comparative Analysis:** Calculated difference in means between accepted/rejected partners
+- **Hypothesis Testing:** Used Z-tests for proportions to test order effects
+- **Logistic Regression:** Isolated effect sizes using standardized predictors
+- **Confidence Intervals:** Validated statistical significance at 95% confidence level
 
-- **Python 3.11**
-- **Pandas** - Data manipulation and analysis
-- **Plotly** - Visualizations
-- **Scikit-learn** - Standardisation
-- **Statsmodels** - Statistical testing
-- **NumPy** - Numerical computing
+**Visualization Strategy:**
+- Plotly for clear bar charts
+- Focused on *differentials* (accepted - rejected) rather than raw scores to isolate decision factors
 
-## 📦 Installation
+---
 
-1. Clone this repository:
-```bash
-git clone https://github.com/JulienRouillard/speed-dating-analysis.git
-cd speed-dating-analysis
-```
+## 🛠️ Tech Stack
 
-2. Install required packages:
-```bash
-pip install -r requirements.txt
-```
+**Analysis & Statistics:**
+- `pandas` — Data manipulation and aggregation
+- `statsmodels` — Logistic regression, proportion tests, p-values
+- `scipy.stats` — Statistical tests
+- `sklearn.preprocessing.StandardScaler` — Feature standardization
 
-3. Launch Jupyter Notebook:
-```bash
-jupyter notebook
-```
+**Visualization:**
+- `plotly.express` — Charts
 
-4. Open `speed_dating_analysis.ipynb`
+**Environment:** Python 3.10, Jupyter Notebook
+
+---
 
 ## 📁 Project Structure
 
 ```
 speed-dating-analysis/
 │
-├── speed_dating_analysis.ipynb    # Main analysis notebook
-├── requirements.txt                # Python dependencies
-├── README.md                       # Project documentation
+├── speed_dating_project.ipynb    # Complete analysis workflow
+├── README.md                      
 │
 ├── data/
-│   ├── Speed_Dating_Data.csv      # Dataset
-│   └── Speed_Dating_Data_Key.doc  # Data dictionary
+│   ├── Speed_Dating_Data.csv     # 8,378 encounters, 551 participants
+│   └── Speed_Dating_Data_Key.doc # Variable codebook
 │
 └── images/
-    ├── diff_attributs_women.png   # Women's attribute differences visualization
-    ├── diff_attributs_men.png     # Men's attribute differences visualization
-    └── self_evaluation_vs_real.png # Self-assessment gap visualization
+    ├── diff_attributs_women.png
+    ├── diff_attributs_men.png
+    └── self_evaluation_vs_real.png
 ```
 
-## 📊 Dataset
+---
 
-The dataset contains information from speed dating experiments, including:
-- 8,378 speed dating encounters
-- 551 participants
-- Demographic information, preferences, and ratings across 6 attributes
-- Match outcomes
+## 💡 Business Applications
 
-**Attributes rated:**
-- Attractiveness (`attr`)
-- Sincerity (`sinc`)
-- Intelligence (`intel`)
-- Fun (`fun`)
-- Ambition (`amb`)
-- Shared interests (`shar`)
+- **Matching Algorithms:** Give more weight to shared interests than to demographic filters (race, background). Shared interests predict compatibility 58x better.
+- **User Profiling:** Don't rely on self-reported attractiveness ratings. Users overestimate their attractiveness by about 1 point on average.
 
-## 🔬 Methodology
-
-1. **Exploratory Data Analysis**: Examining stated preferences and rating distributions
-2. **Comparative Analysis**: Comparing attributes of accepted vs. rejected partners
-3. **Statistical Modeling**: Logistic regression to quantify effect sizes
-4. **Hypothesis Testing**: Z-tests for proportions to validate findings
-
-## 💡 Insights for Real-World Applications
-
-- **Dating apps**: Could benefit from better matching on interests rather than just demographics
-- **Self-awareness**: People systematically overestimate their appeal, suggesting value in honest feedback
-- **First impressions**: Attributes that are quickly observable (attractiveness, fun, shared interests) drive decisions more than deep qualities that require time to discover
+---
 
 ## 📬 Contact
 
-**Julien Rouillard**  
-Email: julien.rouillard@yahoo.fr
+**Julien Rouillard**    
+📧 julien.rouillard@yahoo.fr  
+🔗 [GitHub](https://github.com/JulienRouillard) | [LinkedIn](https://www.linkedin.com/in/julien-rouillard)
