@@ -127,4 +127,4 @@ speed-dating-analysis/
 
 **Julien Rouillard**    
 📧 julien.rouillard@yahoo.fr  
-🔗 [GitHub](https://github.com/JulienRouillard) | [LinkedIn](https://www.linkedin.com/in/julien-rouillard)
+🔗 [GitHub](https://github.com/JulienRouillard) | [LinkedIn](https://www.linkedin.com/in/julien-rouillard-a738a33a9/)
